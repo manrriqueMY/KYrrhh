@@ -22,7 +22,7 @@
                             {
                             <tr onclick="orden(@orden.OrderID)">
                                 <td>@orden.OrderID</td>
-                                <td>@String.Format("{0:yyyy-dd-MM}", orden.OrderDate)</td>
+                                <td>@String.Format("{0:yyyy-MM-dd}", orden.OrderDate)</td>
                                 <td>@orden.Customers.CompanyName</td>
                                 <td>@orden.Customers.Phone</td>
                             </tr>

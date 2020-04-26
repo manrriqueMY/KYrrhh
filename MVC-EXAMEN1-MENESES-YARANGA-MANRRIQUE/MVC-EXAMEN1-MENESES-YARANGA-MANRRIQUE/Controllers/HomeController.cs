@@ -12,7 +12,7 @@ namespace MVC_EXAMEN1_MENESES_YARANGA_MANRRIQUE.Controllers
 
     public class HomeController : Controller
     {
-        NorthwindEntities1 db = new NorthwindEntities1();
+        NorthwindEntities db = new NorthwindEntities();
         public ActionResult Index()
         {
             ViewBag.lista = db.Orders.Where(a => a.ConfirmationStatus != true).ToList();

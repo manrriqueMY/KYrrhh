@@ -20,8 +20,12 @@ function sumar() {
 }
 $(document).on("submit", "#confirma", function (e) {
     e.preventDefault();
-    var id = $("#OrderID").val();
-    $.post(`/Home/Confirma/${id}`, $("#confirma").serialize(), function (res) {
-        alert(res.msg);
+    alertify.confirm("Confirmar Pedido", "COnfirmar Ahora", function () {
+        var id = $("#OrderID").val();
+        $.post(`/Home/Confirma/${id}`, $("#confirma").serialize(), function (res) {
+            alertify.success(res.msg);
+        });
+    }, function () {
+
     });
 });
