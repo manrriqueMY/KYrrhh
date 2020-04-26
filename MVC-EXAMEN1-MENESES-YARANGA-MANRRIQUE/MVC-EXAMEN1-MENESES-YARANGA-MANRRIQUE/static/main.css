@@ -1,0 +1,19 @@
+﻿body {
+}
+
+.content {
+    padding-top: 20px;
+    margin-top: 80px;
+}
+.panel-body{
+    padding-left: 40px;
+}
+.form-control{
+    height:46px;
+}
+.form-group{
+    margin-top: 20px;
+}
+textarea {
+    max-width: 100%;
+}

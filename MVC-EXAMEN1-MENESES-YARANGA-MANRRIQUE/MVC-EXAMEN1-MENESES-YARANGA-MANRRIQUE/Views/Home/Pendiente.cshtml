@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "Pendiente";
+    MVC_EXAMEN1_MENESES_YARANGA_MANRRIQUE.Models.Orders orden = ViewBag.orden;
+}
+
+<div class="content">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Confirmar el Pedido</div>
+        <div class="panel-body">
+            <h1>@orden.Customers.CompanyName</h1>
+            <div>
+                <table id="dtlista" class="table table-bordered table-hover table-striped">
+                    <thead class="bg-info">
+                        <tr>
+                            <td>Código</td>
+                            <td>Descripción</td>
+                            <td>Cantidad</td>
+                            <td>Precio</td>
+                            <td>Total</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (MVC_EXAMEN1_MENESES_YARANGA_MANRRIQUE.Models.Order_Details details in orden.Order_Details)
+                        {
+                            <tr>
+                                <td>@details.ProductID</td>
+                                <td>@details.Products.ProductName</td>
+                                <td>@details.Quantity</td>
+                                <td>@string.Format("{0:F2}", details.UnitPrice - Decimal.Parse(string.Format("{0:F2}", details.Discount)))</td>
+                                <td>@string.Format("{0:F2}", (details.UnitPrice - Decimal.Parse(string.Format("{0:F2}", details.Discount))) * details.Quantity)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="form-group">
+                <form action="/" method="post" id="confirma">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="OrderID" value="@orden.OrderID" />
+                    <input type="hidden" name="ConfirmationID" value="@String.Format("{0}", orden.ConfirmationID.HasValue ? String.Format("{0}",orden.ConfirmationID.Value) : "0")" />
+                    <div class="">
+                        <div class="col-md-4">
+                            <input type="date" name="ConfirmationDate" value="@String.Format("{0}", orden.Confirmation != null ? String.Format("{0}",orden.Confirmation.ConfirmationDate) : "")" class="form-control" required />
+                        </div>
+                        <div class="col-md-4">
+                            <input type="checkbox" name="ConfirmationStatus" value="true" id="ConfirmationStatus" @String.Format("{0}", orden.ConfirmationStatus.HasValue ? "checked" : "") />
+                            <label for="ConfirmationStatus"> Confirmado</label>
+                        </div>
+                        <div class="col-md-1">
+                            <label>Total:</label>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" name="total" id="total" value="" class="form-control" />
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row"></div>
+                    <br />
+                    <div class="">
+                        <div class="col-md-2"><label>Comentario:</label></div>
+                        <div class="col-md-10">
+                            <textarea maxlength="250" cols="100" rows="5" name="ConfimationNote" class="form-control" required>
+                                 @String.Format("{0}", orden.Confirmation != null ? String.Format("{0}",orden.Confirmation.ConfimationNote) : "")
+                            </textarea>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row"></div>
+                    <br />
+                    <div style="display:flex;justify-content:center">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+</script>

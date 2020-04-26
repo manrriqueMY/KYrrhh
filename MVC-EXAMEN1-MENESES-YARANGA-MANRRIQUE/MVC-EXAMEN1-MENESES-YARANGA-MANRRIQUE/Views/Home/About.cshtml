@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Confirmados";
+}
+
+<div class="content">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Registro de Pedido</div>
+        <div class="panel-body">
+            <h1>Listado de Pedidos pendientes de confirmacion</h1>
+            <div class="">
+                <table id="dtlista" class="table table-bordered table-hover table-striped table-responsive">
+                    <thead class="bg-info">
+                        <tr>
+                            <th>Nro Orden</th>
+                            <th>Fecha</th>
+                            <th>Nombre/Razon Social</th>
+                            <th>Teléfono</th>
+                            <th>Fecha de Confirmacion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (MVC_EXAMEN1_MENESES_YARANGA_MANRRIQUE.Models.Orders orden in ViewBag.lista)
+                        {
+                            <tr>
+                                <td>@orden.OrderID</td>
+                                <td>@String.Format("{0:yyyy-dd-MM}", orden.OrderDate)</td>
+                                <td>@orden.Customers.CompanyName</td>
+                                <td>@orden.Customers.Phone</td>
+                                <td>@orden.Confirmation.ConfirmationDate</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
